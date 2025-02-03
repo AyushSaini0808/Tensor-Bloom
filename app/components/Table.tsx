@@ -15,7 +15,7 @@ import {Problem} from "@/mock-problems/problems";
 const TableDemo = () => {
     const router = useRouter();
 
-    const handleRowClick = (id: number) => {
+    const handleRowClick = (id: string) => {
         router.push(`/problems/${id}`);
     };
 

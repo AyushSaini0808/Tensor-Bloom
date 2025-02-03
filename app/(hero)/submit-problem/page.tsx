@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {addDoc, serverTimestamp} from "@firebase/firestore";
 import {collection} from "firebase/firestore";
 import { db } from '@/app/firebase/firebase';
+import {Problem} from "@/utils/types/problem";
 const SubmitProblem = () => {
 
     const [formData, setFormData] = useState<Omit<Problem, 'id'>>({

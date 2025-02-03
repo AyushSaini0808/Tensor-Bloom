@@ -3,7 +3,6 @@ import { Editor } from "@monaco-editor/react";
 import { FaCaretRight } from "react-icons/fa";
 import { RiLoopLeftFill } from "react-icons/ri";
 import {Problem} from "@/utils/types/problem";
-import {runCode} from "@/utils/problems";
 
 type PlaygroundProps={
     problem:Problem

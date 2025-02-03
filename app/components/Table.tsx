@@ -1,87 +1,70 @@
+"use client";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
+import { useRouter } from "next/navigation";
+import { problems } from "@/mock-problems/problems";
+import {Problem} from "@/mock-problems/problems";
 
-const problems = [
-    {
-        id: "INV001",
-        title: "Paid",
-        difficulty: "$250.00",
-        category: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
 
-export function TableDemo() {
+const TableDemo = () => {
+    const router = useRouter();
+
+    const handleRowClick = (id: number) => {
+        router.push(`/problems/${id}`);
+    };
+
+    const getDifficultyColor = (difficulty: string) => {
+        switch (difficulty.toLowerCase()) {
+            case 'easy': return 'text-green-500';
+            case 'medium': return 'text-yellow-500';
+            case 'hard': return 'text-red-500';
+            default: return 'text-gray-400';
+        }
+    };
+
+
     return (
+        <>
         <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead className="w-[100px] text-2xl">Id</TableHead>
+                    <TableHead className="text-2xl">Title</TableHead>
+                    <TableHead className="text-2xl">Difficulty</TableHead>
+                    <TableHead className="text-2xl text-right">Category</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {invoices.map((invoice) => (
-                    <TableRow key={invoice.invoice}>
-                        <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                        <TableCell>{invoice.paymentStatus}</TableCell>
-                        <TableCell>{invoice.paymentMethod}</TableCell>
-                        <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+                {problems.map((problem: Problem) => (
+                    <TableRow
+                        key={problem.id}
+                        className="cursor-pointer transition-colors"
+                        onClick={() => handleRowClick(problem.id)}
+                    >
+                        <TableCell className="font-medium text-xl">
+                            {problem.number}
+                        </TableCell>
+                        <TableCell className="text-xl font-semibold">
+                            {problem.title}
+                        </TableCell>
+                        <TableCell className={`text-xl ${getDifficultyColor(problem.difficulty)}`}>
+                            {problem.difficulty}
+                        </TableCell>
+                        <TableCell className="text-xl text-right">
+                            {problem.category}
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">$2,500.00</TableCell>
-                </TableRow>
-            </TableFooter>
         </Table>
-    )
-}
+        </>
+    );
+};
+
+export default TableDemo;

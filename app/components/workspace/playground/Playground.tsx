@@ -2,17 +2,16 @@ import React, { useRef, useState } from 'react';
 import { Editor } from "@monaco-editor/react";
 import { FaCaretRight } from "react-icons/fa";
 import { RiLoopLeftFill } from "react-icons/ri";
-import {Problem} from "@/utils/types/problem";
-
+import { Problem } from "@/utils/types/problem";
+import type * as monaco from 'monaco-editor';
 type PlaygroundProps={
     problem:Problem
 }
 
 const Playground: React.FC<PlaygroundProps> = ({problem}) => {
-    const editorRef = useRef(null);
-    const [selectedSnippet] = useState(problem.id);
+    const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
     const [fontSize, setFontSize] = useState(14); // Default font size
-    const onMount = (editor) => {
+    const onMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
         editorRef.current = editor;
         editor.focus();
     };

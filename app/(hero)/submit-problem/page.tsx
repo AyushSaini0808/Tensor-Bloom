@@ -35,7 +35,7 @@ const SubmitProblem = () => {
 
         try {
             // Add a new document with auto-generated ID
-            const docRef = await addDoc(collection(db, 'problems'), {
+             await addDoc(collection(db, 'problems'), {
                 ...formData,
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),
@@ -84,7 +84,7 @@ const SubmitProblem = () => {
                     </div>
 
                     <p className="text-lg text-gray-200 leading-relaxed max-w-3xl mx-auto">
-                        Help shape the future of machine learning education! We're actively seeking
+                        Help shape the future of machine learning education! We&#39;re actively seeking
                         <span className="text-purple-300 font-medium"> high-quality problems</span> across all difficulty levels and categories.
                         Your contribution will directly help thousands of developers improve their ML skills.
                     </p>
@@ -229,44 +229,44 @@ const SubmitProblem = () => {
                 </section>
 
                 {/* Code Section */}
-                <section className="space-y-8">
-                    <div className="pb-6 border-b border-white/10">
-                        <h3 className="text-xl font-semibold text-purple-300">Code Setup</h3>
-                        <p className="text-gray-400 mt-2">Provide starter and handler functions</p>
-                    </div>
+                {/*<section className="space-y-8">*/}
+                {/*    <div className="pb-6 border-b border-white/10">*/}
+                {/*        <h3 className="text-xl font-semibold text-purple-300">Code Setup</h3>*/}
+                {/*        <p className="text-gray-400 mt-2">Provide starter and handler functions</p>*/}
+                {/*    </div>*/}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Starter Function *</label>
-                            <div className="relative">
-          <textarea
-              name="starterFunction"
-              value={formData.starterFunction}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg font-mono text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-900 transition-all h-40"
-              placeholder="def starter_function(...):"
-              required
-          />
-                                <span className="absolute right-3 bottom-3 text-gray-500 text-sm">Python</span>
-                            </div>
-                        </div>
+          {/*          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">*/}
+          {/*              <div>*/}
+          {/*                  <label className="block text-sm font-medium mb-2">Starter Function *</label>*/}
+          {/*                  <div className="relative">*/}
+          {/*<textarea*/}
+          {/*    name="starterFunction"*/}
+          {/*    value={formData.starterFunction}*/}
+          {/*    onChange={handleChange}*/}
+          {/*    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg font-mono text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-900 transition-all h-40"*/}
+          {/*    placeholder="def starter_function(...):"*/}
+          {/*    required*/}
+          {/*/>*/}
+          {/*                      <span className="absolute right-3 bottom-3 text-gray-500 text-sm">Python</span>*/}
+          {/*                  </div>*/}
+          {/*              </div>*/}
 
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Handler Function *</label>
-                            <div className="relative">
-          <textarea
-              name="handlerFunction"
-              value={formData.handlerFunction}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg font-mono text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-900 transition-all h-40"
-              placeholder="def handler_function(...):"
-              required
-          />
-                                <span className="absolute right-3 bottom-3 text-gray-500 text-sm">Python</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+          {/*              <div>*/}
+          {/*                  <label className="block text-sm font-medium mb-2">Handler Function *</label>*/}
+          {/*                  <div className="relative">*/}
+          {/*<textarea*/}
+          {/*    name="handlerFunction"*/}
+          {/*    value={formData.handlerFunction}*/}
+          {/*    onChange={handleChange}*/}
+          {/*    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg font-mono text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-900 transition-all h-40"*/}
+          {/*    placeholder="def handler_function(...):"*/}
+          {/*    required*/}
+          {/*/>*/}
+          {/*                      <span className="absolute right-3 bottom-3 text-gray-500 text-sm">Python</span>*/}
+          {/*                  </div>*/}
+          {/*              </div>*/}
+          {/*          </div>*/}
+          {/*      </section>*/}
 
                 {/* Reasoning & Notes */}
                 <section className="space-y-8">

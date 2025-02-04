@@ -1,34 +1,28 @@
-// app/(hero)/problems/[pid]/page.tsx
-
-import React from 'react';
+import { notFound } from 'next/navigation';
 import Workspace from '@/app/components/workspace/Workspace';
 import { problems } from '@/utils/problems';
 import { Problem } from '@/utils/types/problem';
-import { notFound } from 'next/navigation';
 
-// This function replaces getStaticPaths in the App Router.
-// It generates the list of params for which static pages should be generated.
 export async function generateStaticParams() {
     return Object.keys(problems).map((pid) => ({
         pid,
     }));
 }
 
-// The page component is now a Server Component that receives `params` directly.
-export default async function ProblemPage({
-                                              params,
-                                          }: {
-    params: { pid: string };
-}) {
-    const { pid } = params;
+interface ProblemPageProps {
+    params: Promise<{ pid: string }>;
+}
+
+export default async function ProblemPage({ params }: ProblemPageProps) {
+    // Await the params to resolve
+    const { pid } = await params;
+
     const problem: Problem | undefined = problems[pid];
 
-    // If no problem is found, call notFound() to render the 404 page.
     if (!problem) {
         notFound();
     }
 
-    // Convert the handlerFunction to a string for serialization/display purposes.
     problem.handlerFunction = problem.handlerFunction.toString();
 
     return (

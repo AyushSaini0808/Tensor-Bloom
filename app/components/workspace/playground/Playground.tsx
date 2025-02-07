@@ -4,6 +4,7 @@ import { FaCaretRight } from "react-icons/fa";
 import { RiLoopLeftFill } from "react-icons/ri";
 import { Problem } from "@/utils/types/problem";
 import type * as monaco from 'monaco-editor';
+import {editor} from "monaco-editor";
 type PlaygroundProps={
     problem:Problem
 }
@@ -15,6 +16,7 @@ const Playground: React.FC<PlaygroundProps> = ({problem}) => {
         editorRef.current = editor;
         editor.focus();
     };
+
     return (
         <>
 

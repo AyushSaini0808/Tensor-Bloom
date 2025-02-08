@@ -11,6 +11,7 @@ export default {
   	extend: {
 		fontFamily: {
 			'jetbrains-mono': ['"JetBrains Mono"', 'monospace'],
+			'poppins': ['"Poppins"', 'serif']
 		},
   		colors: {
   			background: 'hsl(var(--background))',

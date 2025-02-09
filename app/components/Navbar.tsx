@@ -1,14 +1,14 @@
 "use client";
-
 import React from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";
-import {signInAction, signOutAction} from "@/lib/actions/auth-actions";
+import {signOutAction} from "@/lib/actions/auth-actions";
 
 const Navbar = ({ session }: { session: Session | null }) => {
     const pathname = usePathname();
+    const linkStyles = `ml-6 text-xl hover:bg-zinc-600/30 rounded-lg p-3 transition-colors duration-300 ease-in-out`; // Common styles
 
     return (
         <header className={"py-3 px-3 border-b-2 border-b-violet-950"}>
@@ -26,21 +26,21 @@ const Navbar = ({ session }: { session: Session | null }) => {
                     {session?.user ? (
                         <>
                             <Link href={"/about"}>
-                            <span className={`ml-6 text-xl ${
+                            <span className={`${linkStyles} ${
                                 pathname === "/about"
                                     ? "text-white bg-zinc-600/30 rounded-lg p-3"
                                     : "text-gray-400 hover:text-white"
                             }`}>About</span>
                             </Link>
                             <Link href={"/problems"}>
-                            <span className={`ml-6 text-xl font-light ${
+                            <span className={`${linkStyles} font-light ${
                                 pathname === "/problems"
                                     ? "text-white bg-zinc-600/30 rounded-lg p-3"
                                     : "text-gray-400 hover:text-white"
                             }`}>Problems</span>
                             </Link>
                             <Link href={"/submit-problem"}>
-                            <span className={`ml-6 text-xl ${
+                            <span className={`${linkStyles} ${
                                 pathname === "/submit-problem"
                                     ? "text-white bg-zinc-600/30 rounded-lg p-3"
                                     : "text-gray-400 hover:text-white"
@@ -52,7 +52,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
                             <Link href={"/about"}>
                             <span className={`ml-10 text-xl ${
                                 pathname === "/about"
-                                    ? "text-white underline"
+                                    ? "text-white"
                                     : "text-gray-400 hover:text-white"
                             }`}>About</span>
                             </Link>
@@ -80,14 +80,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
                                 </span>
                             </Link>
                         </>
-                    ) : (
-                        <button
-                            onClick={() => signInAction()}
-                            className={"text-xl bg-zinc-100/80 border-gray-700 mr-3 text-blue-700 font-bold px-5 py-2 border-2 rounded-lg border-blue-500hover:text-black font-jetbrains-mono hover:bg-white transition duration-300 ease-in-out"}
-                        >
-                            Login
-                        </button>
-                    )}
+                    ) : null}
                 </div>
             </nav>
         </header>

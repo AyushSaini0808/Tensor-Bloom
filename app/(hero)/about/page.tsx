@@ -1,8 +1,6 @@
 "use client"
 import React from 'react'
 import {signInAction} from "@/lib/actions/auth-actions";
-import type {Session} from "next-auth";
-
 const About = () => {
     return (
         <div className={"h-screen w-screen gradient-bg"}>

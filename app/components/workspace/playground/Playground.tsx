@@ -10,52 +10,11 @@ type PlaygroundProps={
 
 const Playground: React.FC<PlaygroundProps> = ({problem}) => {
     const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-    const [fontSize, setFontSize] = useState(14);
-    const [code, setCode] = useState(problem.starterFunction);
-    const [output, setOutput] = useState('');
-    const [isRunning, setIsRunning] = useState(false);
-
+    const [fontSize, setFontSize] = useState(14); // Default font size
     const onMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
         editorRef.current = editor;
         editor.focus();
     };
-
-    const handleRun = async () => {
-        setIsRunning(true);
-        setOutput('');
-        try {
-            const response = await fetch('/api/compile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    code: code,
-                    language: 'python', // Update if problem has different languages
-                    input: '' // Add input field in UI if needed
-                }),
-            });
-
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-            const data = await response.json();
-            setOutput(
-                (data.stdout ? `Output:\n${data.stdout}\n` : '') +
-                (data.stderr ? `Errors:\n${data.stderr}` : '')
-            );
-        } catch (error) {
-            console.error('Error:', error);
-            // setOutput(error.message);
-        } finally {
-            setIsRunning(false);
-        }
-    };
-
-    const handleReset = () => {
-        setCode(problem.starterFunction);
-        setOutput('');
-    };
-
 
     return (
         <>
@@ -99,42 +58,30 @@ const Playground: React.FC<PlaygroundProps> = ({problem}) => {
                     height="50vh"
                     theme="vs-dark"
                     language="python"
-                    value={code}
-                    onChange={(value) => setCode(value || '')}
+                    value={problem.starterFunction}
                     onMount={onMount}
                     className="border-2 rounded-sm border-white/30"
                     options={{
                         minimap: { enabled: false },
                         automaticLayout: true,
-                        fontSize: fontSize,
+                        fontSize: fontSize, // Connect font size to state
                         lineNumbersMinChars: 3,
                         scrollBeyondLastLine: false,
                     }}
                 />
-
                 <div className='mt-2 flex items-center space-x-4'>
                     <button
-                        onClick={handleRun}
-                        disabled={isRunning}
-                        className='px-3 border-2 font-bold text-center border-black bg-white text-black py-1.5 text-sm font-jetbrains-mono items-center whitespace-nowrap transition-all focus:outline-none inline-flex bg-dark-fill-3 hover:bg-dark-fill-2 text-dark-label-2 rounded-lg disabled:opacity-50'
+                        className='px-3 border-2 font-bold text-centerborder-black bg-white text-black py-1.5 text-sm font-jetbrains-mono items-center whitespace-nowrap transition-all focus:outline-none inline-flex bg-dark-fill-3  hover:bg-dark-fill-2 text-dark-label-2 rounded-lg'
                     >
-                        <FaCaretRight className="text-xl" />
-                        {isRunning ? 'Running...' : 'Run Code'}
+                        <FaCaretRight className={"text-xl"}/>
+                        Run Code
                     </button>
                     <button
-                        onClick={handleReset}
                         className='text-white/80 border-2 border-white/20 px-3 py-1.5 items-center transition-all focus:outline-none inline-flex text-sm font-jetbrains-mono font-bold bg-dark-green-s hover:bg-green-3 rounded-lg hover:border-white hover:text-white'
                     >
-                        <RiLoopLeftFill className="text-base" />
+                        <RiLoopLeftFill className={"text-base"}/>
                         &nbsp;Reset
                     </button>
-                </div>
-
-                <div className="mt-4">
-                    <div className="text-sm font-bold mb-2">Output:</div>
-                    <pre className="bg-gray-800 p-4 rounded text-sm font-mono whitespace-pre-wrap min-h-[100px]">
-                    {output || (isRunning ? 'Running your code...' : 'Click "Run Code" to see output')}
-                </pre>
                 </div>
             </div>
         </>

@@ -8,7 +8,7 @@ const Landing = () => {
         <div className="min-h-screen flex items-center justify-center p-4 gradient-bg-landing">
             <div className="flex flex-col items-center text-center backdrop-blur px-4 py-8">
                 <Image
-                    src={"/tensor-bloom.png"}
+                    src={"/tensor-bloom.svg"}
                     alt={"logo"}
                     width={200}
                     height={200}
